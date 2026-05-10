@@ -31,17 +31,18 @@ pipeline {
 			}
 		}
 	}
-	stage("SonarQube Analysis") {
-		steps {
-    		withSonarQubeEnv("sonar-server") {
-        		sh """
-        			sonar-scanner \
-        			-Dproject.settings=sonar-project.properties 
-        
-        		"""
-    			}
-		}
-	}
+stage("SonarQube Analysis") {
+    steps {
+        withSonarQubeEnv("sonar-server") {
+            sh """
+                sonar-scanner \
+                -Dproject.settings=sonar-project.properties \
+                -Dsonar.token=$SONAR_TOKEN
+            """
+        }
+    }
+}
+
 
 	stage("Quality Gate") {
 		steps {
@@ -57,14 +58,14 @@ pipeline {
 			dir("Client/connect-gather"){
 				echo "Building Docker Image For ConnectWe Frontend"
 				sh """
-					docker build -t $DOCKER_REPO/connectwe-frontend:${env.BUILD_NUMBER} . 
+					docker build -t $DOCKER_REPO/connectwe-frontend:${IMAGE_TAG} . 
 				"""
 
 			}
 			dir("Server"){
 				echo"Building Docker Image for ConnectWe Backend"
 				sh """
-					docker build -t $DOCKER_REPO/connectwe-backend:${env.BUILD_NUMBER} .
+					docker build -t $DOCKER_REPO/connectwe-backend:${IMAGE_TAG} .
 				"""
 			}
 		}
