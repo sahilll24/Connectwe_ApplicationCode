@@ -99,8 +99,8 @@ stage("SonarQube Analysis") {
 	stage("Update Kubernetes Manifests") { 
 		steps {
 			 sh """
-			 sed -i 's|image: .*connectwe-frontend:.*|image: ${DOCKER_REPO}/connectwe-frontend:${IMAGE_TAG}|g' gitops/frontend/deployment.yaml 
-			 sed -i 's|image: .*connectwe-backend:.*|image: ${DOCKER_REPO}/connectwe-backend:${IMAGE_TAG}|g' gitops/backend/deployment.yaml
+			 sed -i 's|image: .*connectwe-frontend:.*|image: ${DOCKER_REPO}/connectwe-frontend:${IMAGE_TAG}|g' frontend/deployment.yml 
+			 sed -i 's|image: .*connectwe-backend:.*|image: ${DOCKER_REPO}/connectwe-backend:${IMAGE_TAG}|g' backend/deployment.yml
 			 """
 			 
 			}
