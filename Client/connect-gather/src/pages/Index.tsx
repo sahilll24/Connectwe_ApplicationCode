@@ -71,7 +71,7 @@ const Index = () => {
               variants={fadeUp}
               custom={1}
             >
-              Join thousands of people discovering amazing events and building meaningful connections in their communities..........
+              Join thousands of people discovering amazing events and building meaningful connections in their communities....
             </motion.p>
             {/* <motion.div
               className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
